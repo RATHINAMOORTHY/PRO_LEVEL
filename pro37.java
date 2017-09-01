@@ -3,54 +3,39 @@ class pro37
 {
 	public static void main(String args[])
 	{
-		System.out.println("ENTER THE LIMIT");
-		Scanner in=new Scanner(System.in);
-		int n=in.nextInt();
-		ArrayList<Integer> al=new ArrayList<Integer>();
-		for(int i=1;i<=n;i++)
+		List<Integer> ll=new ArrayList<Integer>();
+		Set<Integer> ss=new HashSet<Integer>();
+		for(int i=1;i<100;i++)
+			if(prime(i))
+				ll.add(i);
+		int[] a=new int[ll.size()];
+		int i1=0;
+		for(int n:ll)
+			a[i1++]=n;
+		for(int i=0;i<a.length;i++)
 		{
-			int b=isprime(i);
-			if(b==0)
-				al.add(i);
-		}
-		System.out.print(al);
-		int[] a=new int[al.size()];
-		int j=0;
-		int c=1;
-		for(int i:al)
-		{
-			a[j++]=i;
-			c++;
-		}
-		for(int i=0;i<c;i++)
-		{
-			for(int k=0;k<c;c++)
+			for(int j=0;j<a.length;j++)
 			{
-				if(i!=k)
+				if(prime(a[i]+a[j])&&(a[i]+a[j]<100))
 				{
-					int sum=a[i]+a[j]-1;
-					if(al.contains(sum))
-					{
-						System.out.print(a[i]+" + "+a[j]+" = "+sum);
-					}
+					ss.add(a[i]);
+					ss.add(a[j]);
 				}
 			}
-		}
+		}	
+		System.out.println("THE SUM OF THE PRIME NUMBERS WHICH FORM BELOW 100 ARE  "+"\n"+ss);
 	}
-	public static int isprime(int a)
+	public static boolean prime(int n)
 	{
-		int flag=0;
-		for(int i=2;i<=a/2;i++)
+		boolean b=true;
+		for(int i=2;i<=n/2;i++)
 		{
-			if(a%i==0)
+			if(n%i==0)
 			{
-				flag=1;
+				b=false;
 				break;
 			}
 		}
-		if(flag==0)
-			return 0;
-		else
-		  return 1;
+		return b;
 	}
 }
